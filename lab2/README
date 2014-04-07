@@ -1,0 +1,17 @@
+This is the LaTeX template for the Network Security Course Lab 2.
+
+-- Building on lab computers --
+
+To build this document on the Chalmers Linux System, you need to source
+(include) the LaTeX environment, which sets up the correct paths:
+
+Run "source /chalmers/sw/unsup/texlive/bashrc.inc" in your bash shell.
+
+
+-- Building on private machines --
+
+This tarball ships a binary of biber (a bibtex replacement, version 1.8), which
+is used in the makefile. This should work on the lab computers, but may lead to
+problems on your private machine, if you have a different latex version
+installed. In that case simply remove the bin/ before biber in the Makefile to
+use the locally installed version.

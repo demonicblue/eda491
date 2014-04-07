@@ -1,0 +1,167 @@
+% $Header: https://svn.ita.chalmers.se/repos/security/edu/course/computer_security/trunk/assignment/3/template/latex/report.tex 611 2013-02-20 13:33:23Z pk@CHALMERS.SE $
+%
+%
+
+\documentclass[a4paper,twoside,11pt]{article}
+
+\usepackage{etoolbox}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+
+\usepackage[pdftex,hidelinks]{hyperref}
+\hypersetup{
+    pdfstartview=FitH,
+%    pdftitle={},
+%    pdfauthor={},
+%    pdfsubject={},
+%    pdfkeywords={}
+%    bookmarks,
+%    bookmarksopen,
+%    colorlinks,
+%    linkcolor=blue,
+%    citecolor=blue,
+%    urlcolor=magenta,
+}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+
+
+% Setup bibliography
+\usepackage{csquotes}
+\usepackage[backend=biber, natbib=true, maxnames=2, minnames=1, 
+maxbibnames=10, minbibnames=6, citestyle=numeric-comp, sorting=none, 
+firstinits=true]{biblatex}
+%\providecommand{\bibfont}{\footnotesize}
+%\renewcommand{\bibfont}{\footnotesize}
+
+% To be used for colors
+\usepackage{color}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+
+% Useful Packages
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+
+\usepackage{breakurl}
+\usepackage{paralist}
+\usepackage{graphicx}
+\usepackage{epsfig}
+\usepackage{tabularx}
+\usepackage{subfigure}
+\usepackage[symbol]{footmisc}
+
+
+\usepackage{listings}
+\lstset{language=bash
+    ,basicstyle=\footnotesize\ttfamily
+    ,frame=single
+    ,breaklines=true
+    ,columns=fullflexible
+    ,keepspaces=true
+    ,numbers=left, numberstyle=\tiny, stepnumber=2, numbersep=5pt}
+
+% Nice tables
+\usepackage{hhline}
+\usepackage{booktabs}
+\usepackage{caption}
+
+% Loading ToDo notes
+\usepackage{setspace}
+\usepackage{todonotes}
+\newcommand{\inlinetodo}[2][]{\todo[caption={#2},inline,#1]{#2}}
+\newcommand{\checknote}[2][]{\todo[caption={#2},size=\small,color=yellow!40,#1]{\begin{spacing}{0.5}#2\end{spacing}}}
+
+
+\makeatletter
+\renewcommand{\title}[1]{\gdef\@title{#1}}
+\renewcommand{\author}[1]{\gdef\@author{#1}}
+\renewcommand{\date}[1]{\gdef\@date{#1}}
+\newcommand{\report}[1]{\gdef\@report{#1}}
+\newcommand{\group}[1]{\gdef\@group{#1}}
+\newcommand{\version}[1]{\gdef\@version{#1}}
+
+\newcommand{\maketitlepage}{%
+ \thispagestyle{empty}
+ {
+  \vspace{2cm}
+  {\huge\centering\@title\par}
+  \vspace{2cm}
+  {\centering\@report\par}
+  \vspace{2cm}
+  {\centering\@author\par}
+  \vskip1em
+  {\centering\small Group~\@group\par}
+  \vfill
+  {\centering Version no:~\@version
+   \vskip1em
+   \@date\par}
+  \vspace{2cm}
+
+  \newpage
+  \thispagestyle{empty}
+  \mbox{}
+ }
+}
+\makeatother
+
+\renewcommand{\maketitle}{%
+ \pagestyle{plain}
+ \setcounter{page}{-100}
+ \maketitlepage
+ \newpage
+ \pagenumbering{roman}
+ \tableofcontents
+ \cleardoublepage
+ \pagenumbering{arabic}
+}
+
+% Title and Authors. This should be updated by you!
+\title{The Linux Firewall}
+\report{Laboratory Report in EDA491/DIT071 Computer Security}
+\author{Author 1\\Author 2}
+\group{XX}
+\date{\today}
+\version{0.1}
+
+% The bilbiography to include
+\addbibresource{report.bib}
+
+
+\begin{document}
+
+\maketitle % Make titlepage
+
+\input{intro}
+\newpage
+\input{setup}
+\newpage
+\input{config}
+\newpage
+\input{correctness}
+\newpage
+\input{discussion}
+\newpage
+\input{conclusion}
+\newpage
+
+
+\printbibliography
+\addcontentsline{toc}{section}{References}
+
+\inlinetodo{Please use Vancouver/IEEE style for your referencing. For more
+information please check: 
+\burl{http://www.lib.unimelb.edu.au/cite/ieee/index.html}. References can 
+easily be managed with the program \texttt{JabRef}.}
+
+\appendix
+\newpage
+\input{init-config}
+\newpage
+\input{final-config}
+\newpage
+\input{answers}
+
+\end{document}
