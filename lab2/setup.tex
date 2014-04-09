@@ -16,8 +16,27 @@ The system that was used for the laboratory work was a Linux Redhat computer whi
 	\label{Service table}
 \end{table}
 
-\inlinetodo{This section should include an explanation of the system configuration and the services which are running on the host. It should also include the security requirements (as stated in the lab PM).
-Make appropriate use of tables. For your convenience, an example table is given below, but its content may need to be updated.}
+\begin{table}[h]
+\centering
+	\begin{tabular}{| c | p{5cm} | }
+	\hline
+	 Requirement & Description \\ \hline
+	 Activate logging & Log packets that match specific rules  \\
+	 Default policy: DROP & Change the default policy of the firewall to drop all packets that does not match a chain in the firewall \\
+	 Allow traffic from loopback & Make sure to let the firewall let traffic from loopback through as it can be used to troubleshoot network connection failures. \\
+	 Allow traffic from host & Allow all outgoing traffic from the host, otherwise the host can not communicate. \\
+	 Drop spoofing packets & Make sure to drop all packets from private networks, that the host is not a part of, as these addresses are not used by real hosts. Attackers can spoof their addresses by using these. \\
+	 Stateful inspections & Make the firewall stateful by making it keep track of its current connections. In other words to let through connections that are already established. \\
+	 Ping flood protection & Add some protection against ping flooding by limiting the number of packets the firewall will let through to one packet per second. \\ 
+	 Application specific rules & Add rules to let hosts connect to the services displayed in Table 1. \\
+	\hline
+	\end{tabular}
+	\caption{The security requirements}
+	\label{Security requirements table}
+\end{table}
+
+%\inlinetodo{This section should include an explanation of the system configuration and the services which are running %on the host. It should also include the security requirements (as stated in the lab PM).
+%Make appropriate use of tables. For your convenience, an example table is given below, but its content may need to be %updated.}
 
 The host has an initial firewall configuration, as shown in 
 Listing~\ref{lst:fw-init}.
