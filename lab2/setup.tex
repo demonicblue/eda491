@@ -1,5 +1,20 @@
 \section{System Configuration and Requirements}
 \label{sec:setup}
+The system that was used for the laboratory work was a Linux Redhat computer which had the netfilter framework installed. It contains the program \verb;iptables; to configure the firewall in Linux. The system was set to run three different services, the names, service types and ports can be found in Table 1. The laboratory work consisted of configuring the firewall to meet certain security requirements stated by the lab PM. These requirements were implemented to make the system more secure. The specific requirements can be found in Table 2.
+
+\begin{table}[h]
+\centering
+	\begin{tabular}{| c | c | c |}
+	\hline
+	 Name & Service & Port \\ \hline
+	 OpenSSH & SSH Server & SSH (22) \\
+	 Apache & Web Server & http (8080) \\
+	 Rpcbind & portmapper & sunrpc (111) \\ 
+	\hline
+	\end{tabular}
+	\caption{The services run on the lab system}
+	\label{Service table}
+\end{table}
 
 \inlinetodo{This section should include an explanation of the system configuration and the services which are running on the host. It should also include the security requirements (as stated in the lab PM).
 Make appropriate use of tables. For your convenience, an example table is given below, but its content may need to be updated.}
