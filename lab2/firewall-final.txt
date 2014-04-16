@@ -1,1 +1,46 @@
-{output of iptables -vL --line-numbers}
+Chain INPUT (policy DROP 0 packets, 0 bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+1        0     0 CTH        all  --  em1    any     129.16.0.0/16        anywhere             /* Fix NFS traffic */
+2        0     0 DROP       tcp  --  any    any     anywhere             anywhere             tcpflags: FIN,PSH,URG/FIN,PSH,URG
+3        0     0 DROP       tcp  --  any    any     anywhere             anywhere             tcpflags: FIN,SYN,RST,PSH,ACK,URG/NONE
+4        0     0 ACCEPT     all  --  lo     any     anywhere             anywhere            
+5        0     0 LOG_DROP   all  --  any    any     10.0.0.0/8           anywhere            
+6        0     0 LOG_DROP   all  --  any    any     172.16.0.0/12        anywhere            
+7        0     0 LOG_DROP   all  --  any    any     192.168.0.0/16       anywhere            
+8        0     0 LOG_DROP   all  --  any    any     link-local/16        anywhere            
+9        0     0 ACCEPT     icmp --  any    any     anywhere             anywhere             icmp echo-request limit: avg 1/sec burst 5
+10       0     0 DROP       icmp --  any    any     anywhere             anywhere             icmp echo-request
+11       0     0 ACCEPT     all  --  any    any     anywhere             anywhere             state RELATED,ESTABLISHED
+12       0     0 ACCEPT     tcp  --  any    any     anywhere             anywhere             tcp dpt:ssh
+13       0     0 ACCEPT     tcp  --  any    any     anywhere             anywhere             tcp dpt:http-alt
+14       0     0 ACCEPT     tcp  --  any    any     anywhere             anywhere             tcp dpt:sunrpc
+15       0     0 ACCEPT     udp  --  any    any     anywhere             anywhere             udp dpt:sunrpc
+16       0     0 LOG        tcp  --  any    any     anywhere             anywhere             LOG level warning
+17       0     0 LOG        udp  --  any    any     anywhere             anywhere             LOG level warning
+18       0     0 LOG        icmp --  any    any     anywhere             anywhere             LOG level warning
+
+Chain FORWARD (policy DROP 0 packets, 0 bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+1        0     0 DROP       tcp  --  any    any     anywhere             anywhere             tcpflags: FIN,PSH,URG/FIN,PSH,URG
+2        0     0 DROP       tcp  --  any    any     anywhere             anywhere             tcpflags: FIN,SYN,RST,PSH,ACK,URG/NONE
+
+Chain OUTPUT (policy DROP 0 packets, 0 bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+1        0     0 ACCEPT     all  --  any    em1     anywhere             129.16.0.0/16       
+2        0     0 ACCEPT     all  --  any    lo      anywhere             anywhere            
+3        0     0 LOG_DROP   all  --  any    any     10.0.0.0/8           anywhere            
+4        0     0 LOG_DROP   all  --  any    any     172.16.0.0/12        anywhere            
+5        1    52 LOG_DROP   all  --  any    any     192.168.0.0/16       anywhere            
+6        0     0 LOG_DROP   all  --  any    any     link-local/16        anywhere            
+7        0     0 ACCEPT     all  --  any    em1     anywhere             anywhere            
+
+Chain CTH (1 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1        0     0 ACCEPT     all  --  any    any     129.16.20.26         anywhere             state RELATED,ESTABLISHED /* NFS server soleil */
+2        0     0 RETURN     all  --  any    any     129.16.20.0/22       anywhere             /* Dont look at CE */
+3        0     0 ACCEPT     all  --  any    any     anywhere             anywhere             state RELATED,ESTABLISHED /* Allow the rest to Chalmers */
+
+Chain LOG_DROP (8 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1        1    52 LOG        all  --  any    any     anywhere             anywhere             LOG level warning
+2        1    52 DROP       all  --  any    any     anywhere             anywhere   
