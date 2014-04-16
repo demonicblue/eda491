@@ -23,12 +23,12 @@ This time around incoming echo requests will be blocked going in to our host.
 \begin{figure}[!ht]
     \begin{center}
         \subfigure[Use this Figure to explain Q1]{
-            \includegraphics[scale=0.5]{figures/icmpexample.eps}
+            \includegraphics[scale=0.5]{figures/icmpexampleQ1.eps}
             \label{fig:icmpexampleQ1}
         }
         \hspace{1in}
         \subfigure[Use this Figure to explain Q2]{
-            \includegraphics[scale=0.5]{figures/icmpexample.eps}
+            \includegraphics[scale=0.5]{figures/icmpexampleQ2.eps}
             \label{fig:icmpexampleQ2}
         }
     \end{center}
@@ -63,4 +63,8 @@ With a default policy set to ACCEPT the system would be less secure. Having no c
 \noindent \textbf{Q6. You just added some protection against flooding by 
 limiting the number of packets the firewall will let through to 1 per second. 
 Give two examples on how you can tell that you are protected!}
+~\ \\
+
+Using the ping command we can try to send, for example, five ICMP echo-request packets per second. If the sequence number on the echo-reply packets are inconsistent we then know that some packets were dropped by the firewall.
+We can also check the current configuration to see how many packets matched the new rule with \texttt{sudo iptables -vL}. The output should list a number of packets
 ~\ \\
