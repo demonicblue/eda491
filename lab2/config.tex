@@ -9,9 +9,6 @@ This chain inspects all outgoing packets sent from the host. Rule 1 is not chang
 
 \subsection{Chain LOG_DROP}
 This chain was created only to achieve a clean and more readable script, the number of script lines would otherwise doubled (since one line for DROP and one line for LOG would have been required). The chain simply logs and then drops the packets that enter the chain. Definition can be found on lines 53-55.
-\inlinetodo{Describe the new firewall configuration, together with the output, e.g., 
-rule on line 5 ensures that the number of ping packets are limited to 1. Don't 
-forget to refer to your script in Appendix~\ref{app:fw-final}.}
 
 \lstinputlisting[caption=Final firewall 
 configuration,label=lst:fw-config]{firewall-final.txt}
