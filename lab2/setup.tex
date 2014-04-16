@@ -1,8 +1,9 @@
 \section{System Configuration and Requirements}
 \label{sec:setup}
-The system that was used for the laboratory work was a Linux Redhat computer which had the netfilter framework installed. It contains the program \verb;iptables; to configure the firewall in Linux. The system was set to run three different services, the names, service types and ports can be found in Table 1. The laboratory work consisted of configuring the firewall to meet certain security requirements stated by the lab PM. These requirements were implemented to make the system more secure. The specific requirements can be found in Table 2.
+The system that was used for the laboratory work was a Linux Redhat computer which had the netfilter framework installed. It contains the program \verb;iptables; to configure the firewall in Linux. The firewall was already configured to allow the NFS traffic required for being able to work in the user directory. The firewall was also configured to drop XMAS and NULL packets. This is shown in Listing~\ref{lst:fw-init}. Otherwise, all traffic, in or out, was accepted. The system was set to run three different services, the names, service types and ports can be found in Table 1. The laboratory work consisted of configuring the firewall to meet certain security requirements stated by the lab PM. These requirements were implemented to make the system more secure. The specific requirements can be found in Table 2.
+\lstinputlisting[caption=Initial firewall configuration,label=lst:fw-init]{firewall-init.txt}
 
-\begin{table}[h]
+\begin{table}[htp]
 \centering
 	\begin{tabular}{| c | c | c |}
 	\hline
@@ -16,9 +17,10 @@ The system that was used for the laboratory work was a Linux Redhat computer whi
 	\label{Service table}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[htp]
+\renewcommand{\arraystretch}{1.5}
 \centering
-	\begin{tabular}{| c | p{5cm} | }
+	\begin{tabular}{| c | p{8cm} | }
 	\hline
 	 Requirement & Description \\ \hline
 	 Activate logging & Log packets that match specific rules  \\
@@ -34,12 +36,4 @@ The system that was used for the laboratory work was a Linux Redhat computer whi
 	\caption{The security requirements}
 	\label{Security requirements table}
 \end{table}
-
-%\inlinetodo{This section should include an explanation of the system configuration and the services which are running %on the host. It should also include the security requirements (as stated in the lab PM).
-%Make appropriate use of tables. For your convenience, an example table is given below, but its content may need to be %updated.}
-
-The host has an initial firewall configuration, as shown in 
-Listing~\ref{lst:fw-init}.
-
-\lstinputlisting[caption=Initial firewall configuration,label=lst:fw-init]{firewall-init.txt}
 
