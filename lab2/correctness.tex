@@ -1,5 +1,6 @@
 \section{Firewall Correctness}
 \label{sec:correctness}
+This chapter goes into detail of the set of rule and describes why they work and how they were verified. Making sure they work as intended.
 
 \subsection{Scan protection}
 Since the order matter when configuring rules in the firewall it is important to verify their intent. Even though all chains have a default policy of drop it is necessary to explicitly drop certain packats. Packets matching the pattern of common scan methods are explicitly dropped. This is stated on lines 62-66 in Appendix B. Blocking these packets before reaching any accept-rules ensures the intent of the blockage, even if they are targeting an open port in the firewall. Verifying the effectiveness of the rules was done by performing an XMAS- and NULL-scan against the host using the NMAP tool. The scan failed to detect any of our open ports thus the scan protection is working.
