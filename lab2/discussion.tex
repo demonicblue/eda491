@@ -1,6 +1,22 @@
 \section{Discussion} 
 \label{sec:discussion}
 
-\inlinetodo{Reflect on the current firewall configuration. E.g., is it complete? What have you learned? Recommendations for future configuration, maintenance requirements of the firewall, etc.}
+The final firewall configuration workers as intended, blocking unwanted traffic while still allowing the user to communicate outwards. The order of the rules seems logical by explicitly blocking unwanted packets, allowing wanted and dropping the rest. Although sufficient it may not be enough for the future. New threats and type of attacks may be discovered. Maintenance may be required to ensure proper protection.
+
+%Iptables is a very useful part of Linux, although somewhat tricky to configure. It requires concern on in what order rules are placed, what should be allowed and what should be explicitly dropped. Although powerful, it relies on the user to configure it in a correct manner.
+
+\subsection{Further protection}
+There are a few things that we could implement to improve the firewall even further. One of these is limiting the damage in the case of an intrusion by limiting outgoing traffic. Malicious programs, like botnets, tend to have patterns and use specific ports in their network communication. Known ports malicious ports are a good idea to block. Some malicious programs might start to try and participate in a distributed denial of service attack (DDoS). Limiting the amount of outgoing connection attempts might mitigate the attack before it reaches its target. Cyber attacks like DDoS are illegal in some countries and legal measures may apply to the owner of an infected computer or network.\\
+\\
+Although a good practice to implement it may be hard for the average user to know of such patterns and malicious ports. Measures which blocks specific communication by pattern may be better implemented on a gateway or router level. Thereby protecting all computers within a network and allowing for easier management.
+
+\subsection{Lessons learned}
+One thing we learned from this lab is that the order matters when defining your rules. Some rules may overrule others so it is also important to test your firewall configuration. Your firewall requires verification, the rules might not work as intended. New rules may affect older rules so it is important to keep a logical order in your configuration. In our configuration we started by defining what should be explicitly dropped and then what we want to allow and finally a default drop on packets not matching any rules.
+\\
+\\
+Our final firewall configuration may not be complete but it is a good start for a safer connection to the internet. Other purposes, like running secure services on a server, will require a different firewall configuration.
+
+
+%\inlinetodo{Reflect on the current firewall configuration. E.g., is it complete? What have you learned? Recommendations for future configuration, maintenance requirements of the firewall, etc.}
 
 
