@@ -1,10 +1,11 @@
 \section{System Configuration and Requirements}
 \label{sec:setup}
 The system that was used for the laboratory work was a Linux Redhat computer which had the netfilter framework installed. It contains the program \verb;iptables; to configure the firewall in Linux. The firewall was already configured to allow the NFS traffic required for being able to work in the user directory. The firewall was also configured to drop XMAS and NULL packets. This is shown in Listing~\ref{lst:fw-init}. Otherwise, all traffic, in or out, was accepted. The system was set to run three different services, the names, service types and ports can be found in Table 1. The laboratory work consisted of configuring the firewall to meet certain security requirements stated by the lab PM. These requirements were implemented to make the system more secure. The specific requirements can be found in Table 2 below.
-\lstinputlisting[caption=Initial firewall configuration,label=lst:fw-init]{firewall-init.txt}
+\lstinputlisting[label=lst:fw-init, caption=Initial firewall configuration]{firewall-init.txt}
 
 \begin{table}[htp]
 \centering
+	\caption{The services run on the lab system}
 	\begin{tabular}{| c | c | c |}
 	\hline
 	 Name & Service & Port \\ \hline
@@ -13,17 +14,17 @@ The system that was used for the laboratory work was a Linux Redhat computer whi
 	 Rpcbind & portmapper & sunrpc (111) \\ 
 	\hline
 	\end{tabular}
-	\caption{The services run on the lab system}
 	\label{Service table}
 \end{table}
 
 \begin{table}[htp]
 \renewcommand{\arraystretch}{1.5}
 \centering
+	\caption{The security requirements}
 	\begin{tabular}{| c | p{8cm} | }
 	\hline
 	 Requirement & Description \\ \hline
-	 Activate logging & Log packets that match specific rules  \\
+	 Activate logging & Log packets that match specific rules \\
 	 Default policy: DROP & Change the default policy of the firewall to drop all packets that does not match a chain in the firewall \\
 	 Allow traffic from loopback & Make sure to let the firewall let traffic from loopback through as it can be used to troubleshoot network connection failures. \\
 	 Allow traffic from host & Allow all outgoing traffic from the host, otherwise the host can not communicate. \\
@@ -31,9 +32,9 @@ The system that was used for the laboratory work was a Linux Redhat computer whi
 	 Stateful inspections & Make the firewall stateful by making it keep track of its current connections. In other words to let through connections that are already established. \\
 	 Ping flood protection & Add some protection against ping flooding by limiting the number of packets the firewall will let through to one packet per second. \\ 
 	 Application specific rules & Add rules to let hosts connect to the services displayed in Table 1. \\
+	 Activate logging for unmatched packets & Add rules that log all packets that does not match any of the above requirements \\
 	\hline
 	\end{tabular}
-	\caption{The security requirements}
 	\label{Security requirements table}
 \end{table}
 
