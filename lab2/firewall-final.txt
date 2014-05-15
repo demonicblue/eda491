@@ -3,10 +3,10 @@ num   pkts bytes target     prot opt in     out     source               destina
 1        0     0 CTH        all  --  em1    any     129.16.0.0/16        anywhere             /* Fix NFS traffic */
 2        0     0 DROP       tcp  --  any    any     anywhere             anywhere             tcpflags: FIN,PSH,URG/FIN,PSH,URG
 3        0     0 DROP       tcp  --  any    any     anywhere             anywhere             tcpflags: FIN,SYN,RST,PSH,ACK,URG/NONE
-4        0     0 ACCEPT     all  --  lo     any     anywhere             anywhere            
+4       16  1100 ACCEPT     all  --  lo     any     anywhere             anywhere            
 5        0     0 LOG_DROP   all  --  any    any     10.0.0.0/8           anywhere            
 6        0     0 LOG_DROP   all  --  any    any     172.16.0.0/12        anywhere            
-7        0     0 LOG_DROP   all  --  any    any     192.168.0.0/16       anywhere            
+7        4   445 LOG_DROP   all  --  any    any     192.168.0.0/16       anywhere            
 8        0     0 LOG_DROP   all  --  any    any     link-local/16        anywhere            
 9        0     0 ACCEPT     icmp --  any    any     anywhere             anywhere             icmp echo-request limit: avg 1/sec burst 5
 10       0     0 DROP       icmp --  any    any     anywhere             anywhere             icmp echo-request
@@ -27,12 +27,15 @@ num   pkts bytes target     prot opt in     out     source               destina
 Chain OUTPUT (policy DROP 0 packets, 0 bytes)
 num   pkts bytes target     prot opt in     out     source               destination         
 1        0     0 ACCEPT     all  --  any    em1     anywhere             129.16.0.0/16       
-2        0     0 ACCEPT     all  --  any    lo      anywhere             anywhere            
+2       16  1100 ACCEPT     all  --  any    lo      anywhere             anywhere            
 3        0     0 LOG_DROP   all  --  any    any     10.0.0.0/8           anywhere            
 4        0     0 LOG_DROP   all  --  any    any     172.16.0.0/12        anywhere            
-5        1    52 LOG_DROP   all  --  any    any     192.168.0.0/16       anywhere            
+5       73  4728 LOG_DROP   all  --  any    any     192.168.0.0/16       anywhere            
 6        0     0 LOG_DROP   all  --  any    any     link-local/16        anywhere            
 7        0     0 ACCEPT     all  --  any    em1     anywhere             anywhere            
+8        0     0 LOG        tcp  --  any    any     anywhere             anywhere             LOG level warning
+9        0     0 LOG        udp  --  any    any     anywhere             anywhere             LOG level warning
+10       0     0 LOG        icmp --  any    any     anywhere             anywhere             LOG level warning
 
 Chain CTH (1 references)
 num   pkts bytes target     prot opt in     out     source               destination         
@@ -42,5 +45,5 @@ num   pkts bytes target     prot opt in     out     source               destina
 
 Chain LOG_DROP (8 references)
 num   pkts bytes target     prot opt in     out     source               destination         
-1        1    52 LOG        all  --  any    any     anywhere             anywhere             LOG level warning
-2        1    52 DROP       all  --  any    any     anywhere             anywhere   
+1       77  5173 LOG        all  --  any    any     anywhere             anywhere             LOG level warning
+2       77  5173 DROP       all  --  any    any     anywhere             anywhere    

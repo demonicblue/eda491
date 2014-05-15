@@ -1,7 +1,7 @@
 \section{System Configuration and Requirements}
 \label{sec:setup}
 The system that was used for the laboratory work was a Linux Redhat computer which had the netfilter framework installed. It contains the program \verb;iptables; to configure the firewall in Linux. The firewall was already configured to allow the NFS traffic required for being able to work in the user directory. The firewall was also configured to drop XMAS and NULL packets. This is shown in Listing~\ref{lst:fw-init}. Otherwise, all traffic, in or out, was accepted. The system was set to run three different services, the names, service types and ports can be found in Table 1. The laboratory work consisted of configuring the firewall to meet certain security requirements stated by the lab PM. These requirements were implemented to make the system more secure. The specific requirements can be found in Table 2 below.
-\lstinputlisting[label=lst:fw-init, caption=Initial firewall configuration]{firewall-init.txt}
+\lstinputlisting[label=lst:fw-init, caption=Initial firewall configuration, captionpos=b]{firewall-init.txt}
 
 \begin{table}[htp]
 \centering

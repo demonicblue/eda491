@@ -87,10 +87,14 @@ $IPTABLES -A INPUT -p tcp --dport 8080 -j ACCEPT	#ACCEPT application web server
 $IPTABLES -A INPUT -p tcp --dport 111 -j ACCEPT		#ACCEPT application rpc-bind
 $IPTABLES -A INPUT -p udp --dport 111 -j ACCEPT		#ACCEPT application rpc-bind
 
-$IPTABLES -A INPUT -p tcp -j LOG					#LOG all incoming TCP connections
-$IPTABLES -A INPUT -p udp -j LOG					#LOG all incoming UDP connections
-$IPTABLES -A INPUT -p icmp -j LOG					#LOG all incoming ICMP, connections
+$IPTABLES -A INPUT -p tcp -j LOG					#LOG all incoming TCP connections that did not match the other rules
+$IPTABLES -A INPUT -p udp -j LOG					#LOG all incoming UDP connections that did not match the other rules
+$IPTABLES -A INPUT -p icmp -j LOG					#LOG all incoming ICMP, connections that did not match the other rules
 
+
+$IPTABLES -A OUTPUT -p tcp -j LOG					#LOG all outgoing TCP connections that did not match the other rules
+$IPTABLES -A OUTPUT -p udp -j LOG					#LOG all outgoing UDP connections that did not match the other rules
+$IPTABLES -A OUTPUT -p icmp -j LOG					#LOG all outgoing ICMP, connections that did not match the other rules
 
 echo "Done!"
 
